@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Administrasi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #1e1e1e;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        input {
+            background: #444;
+            color: #fff;
+        }
+
+        button {
+            background: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        table th, table td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #555;
+        }
+
+        .hapus {
+            background: #dc3545;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Urunan Bakar² Cok</h2>
+
+    <input type="text" id="nama" placeholder="Nama">
+    <input type="number" id="jumlah" placeholder="Jumlah Iuran (Rp)">
+    <button onclick="tambahData()">Tambah</button>
+
+    <table>
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nama</th>
+                <th>Jumlah</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody id="tabelData"></tbody>
+    </table>
+</div>
+
+<script>
+    let no = 1;
+
+    function tambahData() {
+        let nama = document.getElementById("nama").value;
+        let jumlah = document.getElementById("jumlah").value;
+
+        if (nama === "" || jumlah === "") {
+            alert("Nama dan jumlah harus diisi!");
+            return;
+        }
+
+        let tabel = document.getElementById("tabelData");
+        let row = tabel.insertRow();
+
+        row.innerHTML = `
+            <td>${no++}</td>
+            <td>${nama}</td>
+            <td>Rp ${jumlah}</td>
+            <td><span class="hapus" onclick="hapusData(this)">Hapus</span></td>
+        `;
+
+        document.getElementById("nama").value = "";
+        document.getElementById("jumlah").value = "";
+    }
+
+    function hapusData(btn) {
+        let row = btn.parentElement.parentElement;
+        row.remove();
+    }
+</script>
+
+</body>
+</html>
